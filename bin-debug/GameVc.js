@@ -46,6 +46,42 @@ var GameVc = (function (_super) {
                 this.viewGroup.removeChildren();
                 this.viewGroup.addChild(new Shake);
                 break;
+            case this.Rotation:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Rotation);
+                break;
+            case this.mvp:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new MvpMat);
+                break;
+            case this.water:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Water);
+                break;
+            case this.grain:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Loading);
+                break;
+            case this.boom:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Boom);
+                break;
+            case this.julia:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Julia);
+                break;
+            case this.fade:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Fade);
+                break;
+            case this.fold:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Fold);
+                break;
+            case this.blur:
+                this.viewGroup.removeChildren();
+                this.viewGroup.addChild(new Blur);
+                break;
         }
     };
     return GameVc;

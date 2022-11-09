@@ -1,6 +1,13 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
+var __extends = this && this.__extends || function __extends(t, e) { 
+ function r() { 
+ this.constructor = t;
+}
+for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
+r.prototype = e.prototype, t.prototype = new r();
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36,26 +43,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DebugPlatform = (function () {
-    function DebugPlatform() {
+var Julia = (function (_super) {
+    __extends(Julia, _super);
+    function Julia() {
+        return _super.call(this) || this;
     }
-    DebugPlatform.prototype.getUserInfo = function () {
+    Julia.prototype.initUI = function () {
+        var content = new eui.Image('bg_jpg');
+        var stage = egret.MainContext.instance.stage;
+        content.width = stage.stageWidth;
+        content.height = stage.stageHeight;
+        this.addChild(content);
+        this.initShader(content);
+    };
+    Julia.prototype.initShader = function (content) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, { nickName: "username" }];
+            var customFilter, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        _b = (_a = egret.CustomFilter).bind;
+                        return [4 /*yield*/, getShader(ShaderConstant.VERTEX)];
+                    case 1:
+                        _c = [void 0, _d.sent()];
+                        return [4 /*yield*/, getShader(ShaderConstant.F_JULIA)];
+                    case 2:
+                        customFilter = new (_b.apply(_a, _c.concat([_d.sent(), {
+                                zoom: 0.1,
+                            }])))();
+                        content.filters = [customFilter];
+                        egret.startTick(function (timeStamp) {
+                            customFilter.uniforms.zoom += 0.1;
+                            return false;
+                        }, this);
+                        return [2 /*return*/];
+                }
             });
         });
     };
-    DebugPlatform.prototype.login = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    };
-    return DebugPlatform;
-}());
-__reflect(DebugPlatform.prototype, "DebugPlatform", ["Platform"]);
-if (!window.platform) {
-    window.platform = new DebugPlatform();
-}
+    return Julia;
+}(BaseEuiView));
+__reflect(Julia.prototype, "Julia");
